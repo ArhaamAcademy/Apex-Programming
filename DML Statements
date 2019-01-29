@@ -1,3 +1,5 @@
+//DML Statements
+
 //INSERT OPERATION
 //Inserting data i two tables correspondig first value's id
 Customer__c objCust=new Customer__c();
