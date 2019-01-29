@@ -13,7 +13,7 @@ insert objNewInvoice;
 System.debug('The customer'we added +objCust +' and the corresponding invoice for the customer '+objNewInvoice);
 
 //UPDATE OPERATION
-//Updating 
+//Updating multiple records making them as a list first then a single DML statement is enough for the operation. This is a good practice.
 List<Invoice__c> invoiceList=[select Id,Name,Status__c,createdDate from Invoice__c];
 
 List<Invoice__c> updateInvoiceList=new List<Invoice__c>();
@@ -28,3 +28,16 @@ for(Invoice__c obj:invoiceList)
 }
 update updateInvoiceList;
 System.debug('List has been updated and updated value of records are:'+updateInvoiceList);
+
+//UPSERT OPERATION
+//Creating an empty list and using it to do multiple operation like updating and inserting new records symultaniously
+List<Customer__c> customerList=new List<Customer__c>();
+Customer__c cus=[select Id,External_id__c,Customer_description__c from Customer__c where External_id__c='1234'];
+cus.Customer_description__c = 'Hello how are you?';
+customerList.add(cus);
+for(integer i=2;i<11;i++)
+{
+    Customer__c objCust=new Customer__c(name='Test'+i,external_id__c='1234'+i); 
+    customerList.add(objCust);
+}
+upsert customerList;
