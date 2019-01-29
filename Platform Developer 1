@@ -1,3 +1,4 @@
+//INSERT OPERATION
 //Inserting data i two tables correspondig first value's id
 Customer__c objCust=new Customer__c();
 objCust.Name='Test ABC';
@@ -11,6 +12,7 @@ objNewInvoice.Customer__c=objCust.id;
 insert objNewInvoice;
 System.debug('The customer'we added +objCust +' and the corresponding invoice for the customer '+objNewInvoice);
 
+//UPDATE OPERATION
 //Updating 
 List<Invoice__c> invoiceList=[select Id,Name,Status__c,createdDate from Invoice__c];
 
