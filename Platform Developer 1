@@ -41,3 +41,10 @@ for(integer i=1;i<10;i++)
     customerList.add(objCust);
 }
 upsert customerList;
+
+//DELETE OPERATION
+//Deleting multiple or single record
+
+List<Customer__c> customerToDel=[select id from Customer__c where Customer__c.Name LIKE 'Test%'];
+delete customerToDel;
+System.debug('SUCCESS '+customerToDel.size()+' Has been deleted');
