@@ -35,7 +35,7 @@ List<Customer__c> customerList=new List<Customer__c>();
 Customer__c cus=[select Id,External_id__c,Customer_description__c from Customer__c where External_id__c='1234'];
 cus.Customer_description__c = 'Hello how are you?';
 customerList.add(cus);
-for(integer i=2;i<11;i++)
+for(integer i=1;i<10;i++)
 {
     Customer__c objCust=new Customer__c(name='Test'+i,external_id__c='1234'+i); 
     customerList.add(objCust);
