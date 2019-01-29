@@ -1,1 +1,38 @@
+//INSERT Statement with Database Method
 
+Customer__c objCust=new Customer__c();
+objCust.Name='Test';
+insert objCust;
+
+List<Invoice__c> InvoiceListToInsert=new List<Invoice__c>();
+
+Invoice__c objNewInvoice=new Invoice__c ();
+objNewInvoice.Status__c='Pending';
+objNewInvoice.Customer__c=objCust.id;
+objNewInvoice.Amount_Paid__c=1000;
+InvoiceListToInsert.add(objNewInvoice);
+
+Invoice__c objNewInvoice2=new Invoice__c ();
+objNewInvoice2.Status__c='Pending';
+objNewInvoice2.Amount_Paid__c=1200;
+InvoiceListToInsert.add(objNewInvoice2);
+
+Database.SaveResult[] srList=Database.insert(InvoiceListToInsert,false);
+
+for(Database.SaveResult sr:srList)
+{
+	if(sr.isSuccess())
+	{
+		System.debug('Successfully inserted the invoice'+sr.getId());
+
+	}
+	else
+	{
+		for(Database.Error objError:sr.getErrors())
+		{
+			System.debug('Thw following error has occured');
+			System.debug(objError.getStatusCode()+ ':' +objError.getMessage());
+			System.debug('Invoice object fields which are affected '+objError.getFields());
+		}
+	}
+}
