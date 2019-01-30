@@ -17,7 +17,9 @@ objNewInvoice2.Status__c='Pending';
 objNewInvoice2.Amount_Paid__c=1200;
 InvoiceListToInsert.add(objNewInvoice2);
 
-Database.SaveResult[] srList=Database.insert(InvoiceListToInsert,false);
+Database.SaveResult[] srList=Database.insert(InvoiceListToInsert,false); 
+//The second parameter value in the operation with fales means It's allows partial update. When It's true 
+//then It's not possible to do partial update.
 
 for(Database.SaveResult sr:srList)
 {
