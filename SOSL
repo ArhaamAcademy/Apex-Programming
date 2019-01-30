@@ -1,0 +1,6 @@
+//Salesforce Object Search Language
+//Find Method, retriving only in name field of Customer object.
+
+List<list<SObject>> customerList=[FIND 'ABC*' IN NAME Fields RETURNING Customer__c(Id,Customer__c.Name,Customer__c.Customer_Description__c)];
+
+System.debug('The result is' +customerList);
