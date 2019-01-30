@@ -38,3 +38,34 @@ for(Database.SaveResult sr:srList)
 		}
 	}
 }
+
+//Updating with Database Method
+List<Invoice__c> invoiceList=[select id,Name,Status__c,createdDate from Invoice__c];
+List<Invoice__c> updatedInvoiceList=new List<Invoice__c>();
+for(Invoice__c objInvoice:invoiceList)
+{
+    if(objInvoice.Status__c =='Pending')
+    {
+        objInvoice.Status__c ='Paid';
+        updatedInvoiceList.add(objInvoice);
+    }
+}
+Database.SaveResult[] srlist=Database.update(updatedInvoiceList,false);
+
+for(Database.SaveResult sr:srList)
+{
+    if(sr.isSuccess())
+    {
+        System.debug('Successfully updated records'+sr.getId());
+    }
+    else
+    {
+        for(Database.Error objErr:sr.getErrors())
+        {
+            System.debug('The error occured');
+            System.debug(objErr.getStatusCode() +' : ' + objErr.getMessage());
+            System.debug('Invoice fields are affected by the error'+objErr.getFields());
+        }
+        
+    }
+}
