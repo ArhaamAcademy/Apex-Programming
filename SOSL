@@ -5,4 +5,18 @@ List<List<SObject>> customerList=[FIND 'ABC*' IN NAME Fields RETURNING Customer_
 
 System.debug('the result is' +customerList);
 
+//Creating a singele empty List and using it to find records from multiple objects and finally showing data in different variables.
+
+List<List<SObject>> customerAccountSearchList=new List<List<SObject>>();
+
+    customerAccountSearchList=[FIND 'ABC*' IN ALL Fields RETURNING 
+                                  Customer__c(Id,Customer__c.Name,Customer__c.Customer_Description__c),Account(Id,Name)];
+System.debug('the result is' +customerAccountSearchList);
+
+Customer__c[] searchCustomer=(List<Customer__c>)customerAccountSearchList[0];
+Account[] searchAccount=(List<Account>)customerAccountSearchList[1];
+
+System.debug('Customer record matching the criteria' +searchCustomer);
+System.debug('Account record matching the criteria' +searchAccount);
+
 
