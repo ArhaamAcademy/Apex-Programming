@@ -1,6 +1,8 @@
 //Salesforce Object Search Language
-//Find Method, retriving only in name field of Customer object.
+//Find Method, retriving only name field using specific field name IN NAME field of Customer object. But when it will use IN ALL then it will return all the matched records from the hole object. 
 
 List<List<SObject>> customerList=[FIND 'ABC*' IN NAME Fields RETURNING Customer__c(Id,Customer__c.Name,Customer__c.Customer_Description__c)];
 
 System.debug('the result is' +customerList);
+
+
